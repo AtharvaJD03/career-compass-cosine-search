@@ -4,6 +4,26 @@ A Spring Boot based backend application that recommends career roles using **TF-
 
 ---
 
+## ▶️ How To Run The Project
+
+### 1️⃣ Clone the repository
+
+```bash
+git clone https://github.com/AtharvaJD03/career-compass-cosine-search.git
+```
+
+### 2️⃣ Open in IntelliJ IDEA
+
+Open the project as a Maven project.
+
+### 3️⃣ Run the Application
+
+Run: CareerCompassBackendApplication.java
+
+The server will start at: http://localhost:8080
+
+---
+
 ## 📌 Project Overview
 
 This backend system:
@@ -38,20 +58,3 @@ This backend system:
 
 ---
 
-## ▶️ How To Run The Project
-
-### 1️⃣ Clone the repository
-
-```bash
-git clone https://github.com/AtharvaJD03/career-compass-cosine-search.git
-```
-
-### 2️⃣ Open in IntelliJ IDEA
-
-Open the project as a Maven project.
-
-### 3️⃣ Run the Application
-
-Run: CareerCompassBackendApplication.java
-
-The server will start at: http://localhost:8080
