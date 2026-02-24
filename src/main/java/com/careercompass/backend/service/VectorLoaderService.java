@@ -10,8 +10,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.careercompass.backend.model.RecommendationResponse;
-import java.util.Comparator;
+//import com.careercompass.backend.model.RecommendationResponse;
+//import java.util.Comparator;
+import java.util.AbstractMap;
 import java.util.stream.Collectors;
 
 import java.util.Set;
@@ -29,23 +30,21 @@ public class VectorLoaderService {
         return careerVectors;
     }
 
-    public List<RecommendationResponse> findTopMatches(List<Double> inputVector, int topK) {
+    public List<String> findTopMatches(List<Double> inputVector, int topK) {
 
         if (inputVector == null || inputVector.isEmpty()) {
             throw new IllegalArgumentException("Input vector cannot be null or empty");
         }
 
         return careerVectors.stream()
-                .map(career -> {
-                    double similarity = cosineSimilarity(inputVector, career.getVector());
-                    return new RecommendationResponse(
-                            career.getJob_role(),
-                            similarity
-                    );
-                })
-                .sorted(Comparator.comparingDouble(RecommendationResponse::getSimilarityScore).reversed())
-                .filter(distinctByKey(RecommendationResponse::getJobRole))
+                .map(career -> new AbstractMap.SimpleEntry<>(
+                        career.getJob_role(),
+                        cosineSimilarity(inputVector, career.getVector())
+                ))
+                .sorted((a, b) -> Double.compare(b.getValue(), a.getValue()))
+                .filter(distinctByKey(entry -> entry.getKey()))
                 .limit(topK)
+                .map(entry -> entry.getKey())
                 .collect(Collectors.toList());
     }
 
